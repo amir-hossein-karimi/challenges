@@ -18,10 +18,10 @@ const users = [
 const grouper = (arr, groupKey) => {
   const newObj = {};
   arr.forEach((arrItem, index) => {
-    if (newObj[arr[index][groupKey]]) {
-      newObj[arr[index][groupKey]] = [...newObj[arr[index][groupKey]], arrItem];
+    if (newObj[arrItem[groupKey]]) {
+      newObj[arrItem[groupKey]] = [...newObj[arrItem[groupKey]], arrItem];
     } else {
-      newObj[arr[index][groupKey]] = [arrItem];
+      newObj[arrItem[groupKey]] = [arrItem];
     }
   });
 
