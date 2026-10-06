@@ -17,22 +17,18 @@ const ApiMock = () => {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const retry = async (api, times) => {
-  let attempt = 0;
-
-  while (attempt <= times) {
+const retry = async (fn, retries) => {
+  for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      return await api();
+      return await fn();
     } catch (error) {
-      if (attempt === times) {
+      if (attempt === retries) {
         throw error;
       }
 
-      attempt++;
+      const delay = 1000 * 2 ** attempt;
 
-      console.log(`Retrying in ${attempt} second(s)...`);
-
-      await sleep(attempt * 1000);
+      await sleep(delay);
     }
   }
 };
